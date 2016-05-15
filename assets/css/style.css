@@ -29,12 +29,19 @@ body {
 }
 
 header {
-    height: 10%;
     width: 100%;
     font-size: 80px;
     color: yellow;
     z-index: 1;
-    border: 5px solid black;
+    text-align: center;
+}
+
+h1 {
+    display: inline-block;
+}
+
+div > * {
+    vertical-align:middle;
 }
 
 /*img {
@@ -45,8 +52,8 @@ header {
 }*/
 
 .wrapper {
+    margin-top: 40px;
 	position: relative;
-    height: 100%;
     text-align: center;
     font-size: 28px;
 }
@@ -56,14 +63,12 @@ header {
     bottom: 0;
     left: 5%;*/
     display: inline-block;
-    max-height: 90%;
-    max-width: 50%;*/
     z-index: -1;
-    border: 5px solid black;
+    margin-left:100px;
 }
 
 .hangman > img {
-    max-width: 50%;
+    max-height: 400px;
 }
 
 .info {
@@ -72,17 +77,13 @@ header {
 	left: 45%;*/
     position: relative;
     display: inline-block;
-    max-height: 100%;
-    width: 24%;
 	line-height: 2em;
-    border: 5px solid black;
 }
 
 .answer {
     position: absolute;
-    top: 0;
-    left: 0;
-    border: 5px solid black;
+    top: 10px;
+    left: 10;
 }
 
 .red {
@@ -108,3 +109,33 @@ header {
 .pink {
     color: pink;
 }
+
+.yellow > h1, .pink > h1 {
+    display: block;
+}
+
+@media screen and (max-width: 980px) and (min-width: 769px) {
+    .hangman {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        font-size: 50px;
+    }
+    .wrapper {
+        margin-top: 20px;
+        font-size: 22px;
+    }
+    .hangman {
+        margin: 0;
+    }
+    .hangman > img, .character > img {
+        max-height: 200px;
+    }
+}
+
+/*@media screen and (max-width: 640px) {
+    
+}*/
