@@ -2,11 +2,41 @@
 <html lang="en">
 <head>
 	<title>Hangman</title>
+	<!-- Reset CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <!-- Custom CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<!-- Media Queries -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	
+	<div class="wrapper">
+		<header>
+	        <h1>Spongebob Hangman</h1>
+		</header>
+		<!-- Hangman -->
+		<div class="hangman"></div>
+		<div class="info">
+			<!-- Instructions -->
+			<h1 class="green">Press any key to get started!</h1>
+			<h1 class="blue">Wins:</h1>
+			<h1 class="blue wins"></h1>
+			<h1 class="yellow">Current Word</h1>
+			<h1 class="yellow positions"></h1>
+			<h1 class="brown">Number of guesses remaining</h1>
+			<h1 class="brown guesses"></h1>
+			<h1 class="pink">Letters already guessed</h1>
+			<h1 class="pink letters-guessed"></h1>
+			<h1 class="red"></h1>
+			<!-- Answer -->
+			<div class="answer">
+				<h1 class="response"></h1>
+				<div class="character"></div>
+				<h1 class="anykey"></h1>
+			</div>
+		</div>
+	</div>
+	<!-- Custom JS -->
+	<script src="assets/javascript/game.js"></script>
 </body>
 </html>
