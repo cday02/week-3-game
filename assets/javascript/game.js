@@ -6,6 +6,8 @@ window.onload = function() {
 	var guessedLetters = [];
 	var guesses;
 	var wins;
+	var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+	var count = 0;
 
 	// Set inital wins
 	wins = 0;
@@ -44,6 +46,45 @@ window.onload = function() {
 			}
 			// Check to see if player won or lost
 			checkWin();
+		}
+		// Media query to add input for mobile devices
+		if (window.matchMedia("(min-width: 640px)").matches) {
+			/* the viewport is at least 640 pixels wide */
+		} else {
+			/* the viewport is less than 640 pixels wide */
+			// Add arrows, letter, and guess
+			document.querySelector(".media-input").innerHTML = '<button class="left"><</button><div class="letters"></div><button class="right">></button><button class="guessLetter">Guess</button>';
+			// Change directions
+			document.querySelector(".green").innerHTML = "Press the arrows to change letter!";
+			// Show first letter A
+			document.querySelector(".letters").innerHTML = alphabet[count];
+			// Move to left letter
+			document.querySelector(".left").addEventListener("click", function(){
+			    if (count == 0) {
+					count = 25;
+				} else {
+					count--;
+				}
+				document.querySelector(".letters").innerHTML = alphabet[count];
+			});
+			// Move to right letter
+			document.querySelector(".right").addEventListener("click", function(){
+			    if (count == 25) {
+					count = 0;
+				} else {
+					count++;
+				}
+				document.querySelector(".letters").innerHTML = alphabet[count];
+			});
+			// Guess letter
+			document.querySelector(".guessLetter").addEventListener("click", function(){
+			    // Reset non-letter and already-guessed
+				document.querySelector(".red").innerHTML = "";
+				// Get letter from player, check if already guessed, then replace letter
+				checkGuessed(document.querySelector(".letters").innerHTML);
+				// Check to see if player won or lost
+				checkWin();
+			});
 		}
 	}
 
@@ -174,49 +215,6 @@ window.onload = function() {
 			num = 0;
 			newWord(num);
 		}
-	}
-
-	var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-	var count = 0;
-
-	// Media query to add input for mobile devices
-	if (window.matchMedia("(min-width: 640px)").matches) {
-		/* the viewport is at least 640 pixels wide */
-	} else {
-		/* the viewport is less than 640 pixels wide */
-		// Add arrows, letter, and guess
-		document.querySelector(".media-input").innerHTML = '<button class="left"><</button><div class="letters"></div><button class="right">></button><button class="guessLetter">Guess</button>';
-		// Change directions
-		document.querySelector(".green").innerHTML = "Press the arrows to change letter!";
-		// Show first letter A
-		document.querySelector(".letters").innerHTML = alphabet[count];
-		// Move to left letter
-		document.querySelector(".left").addEventListener("click", function(){
-		    if (count == 0) {
-				count = 25;
-			} else {
-				count--;
-			}
-			document.querySelector(".letters").innerHTML = alphabet[count];
-		});
-		// Move to right letter
-		document.querySelector(".right").addEventListener("click", function(){
-		    if (count == 25) {
-				count = 0;
-			} else {
-				count++;
-			}
-			document.querySelector(".letters").innerHTML = alphabet[count];
-		});
-		// Guess letter
-		document.querySelector(".guessLetter").addEventListener("click", function(){
-		    // Reset non-letter and already-guessed
-			document.querySelector(".red").innerHTML = "";
-			// Get letter from player, check if already guessed, then replace letter
-			checkGuessed(document.querySelector(".letters").innerHTML);
-			// Check to see if player won or lost
-			checkWin();
-		});
 	}
 
 }
