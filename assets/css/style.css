@@ -144,6 +144,9 @@ button {
     .hangman > img, .character > img {
         max-height: 200px;
     }
+    .info {
+        line-height: 1.5em;
+    }
 }
 
 /*@media screen and (max-width: 640px) {
