@@ -158,4 +158,14 @@ window.onload = function() {
 			selectNewWord();
 		}
 	}
+
+	// Media query to add input for mobile devices
+	var mq = window.matchMedia('@media all and (max-width: 640px)');
+	if(mq.matches) {
+	    // the width of browser is more then 640px
+	} else {
+	    // the width of browser is less then 640px
+	    document.querySelector(".media-input").innerHTML = '<input type="text">';
+	}
+
 }
