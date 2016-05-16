@@ -169,6 +169,8 @@ window.onload = function() {
 		/* the viewport is less than 640 pixels wide */
 		// Add arrows, letter, and guess
 		document.querySelector(".media-input").innerHTML = '<button class="left"><</button><div class="letters"></div><button class="right">></button><button class="guessLetter">Guess</button>';
+		// Change directions
+		document.querySelector(".green").innerHTML = "Press the arrows to change letter!";
 		// Show first letter A
 		document.querySelector(".letters").innerHTML = alphabet[count];
 		// Move to left letter
