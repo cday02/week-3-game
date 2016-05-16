@@ -31,24 +31,23 @@ window.onload = function() {
 			positions.push("_");
 		}
 		document.querySelector(".positions").innerHTML = positions.join(" ");
+		// Listen for keystrokes
+		document.onkeyup = function(event) {
+			// Reset non-letter and already-guessed
+			document.querySelector(".red").innerHTML = "";
+			// Get letter from player, check if already guessed, then replace letter
+			if (event.keyCode >= 65 && event.keyCode <= 90) {
+				userGuess = String.fromCharCode(event.keyCode).toUpperCase();
+				checkGuessed(userGuess);
+			} else {
+				document.querySelector(".red").innerHTML = "Please press a letter";
+			}
+			// Check to see if player won or lost
+			checkWin();
+		}
 	}
 
-	// Listen for keystrokes
-	document.onkeyup = function(event) {
-		// Reset non-letter and already-guessed
-		document.querySelector(".red").innerHTML = "";
-		// Get letter from player, check if already guessed, then replace letter
-		if (event.keyCode >= 65 && event.keyCode <= 90) {
-			userGuess = String.fromCharCode(event.keyCode).toUpperCase();
-			checkGuessed(userGuess);
-		} else {
-			document.querySelector(".red").innerHTML = "Please press a letter";
-		}
-		// Check to see if player won or lost
-		checkWin();
-		// Answer reset
-		desktopAnswerReset();
-	}
+	
 
 	function checkGuessed(userGuess) {
 		// Check to see if letter matches any letters in word
@@ -126,19 +125,20 @@ window.onload = function() {
 		// Show answer
 		document.querySelector(".response").innerHTML = letter + "orrect! Its " + words[num] + "!";
 		document.querySelector(".character").innerHTML = '<img src="assets/images/' + words[num] + '.png">';
-	}
-
-	function desktopAnswerReset() {
 		// Any key restarts game
 		document.querySelector(".anykey").innerHTML = "Press any key to continue";
+		// Listen for key to reset
 		document.onkeyup = function(event) {
 			answerReset();
 		}
-	}
-
-	function mobileAnswerReset() {
-		// Guess key restarts game
-		document.querySelector(".anykey").innerHTML = "Press any guess to continue";
+		// Any key restarts game
+		document.querySelector(".left").addEventListener("click", function(){
+		    answerReset();
+		});
+		document.querySelector(".right").addEventListener("click", function(){
+		    answerReset();
+		});
+		// Listen for press to reset
 		document.querySelector(".guessLetter").addEventListener("click", function(){
 		    answerReset();
 		});
@@ -216,8 +216,6 @@ window.onload = function() {
 			checkGuessed(document.querySelector(".letters").innerHTML);
 			// Check to see if player won or lost
 			checkWin();
-			// Answer reset
-			mobileAnswerReset();
 		});
 	}
 
