@@ -114,8 +114,19 @@ div > * {
     display: block;
 }
 
-input {
-    width: 20px;
+.media-input > * {
+    display: inline;
+}
+
+button {
+    background: brown;
+    border: 2px solid black;
+    border-radius: 5%;
+    padding: 5px;
+}
+
+.guessLetter {
+    margin-left: 40px;
 }
 
 @media screen and (max-width: 980px) and (min-width: 769px) {

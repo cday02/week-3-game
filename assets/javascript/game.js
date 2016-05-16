@@ -31,21 +31,21 @@ window.onload = function() {
 			positions.push("_");
 		}
 		document.querySelector(".positions").innerHTML = positions.join(" ");
+	}
 
-		// Listen for keystrokes
-		document.onkeyup = function(event) {
-			// Reset non-letter and already-guessed
-			document.querySelector(".red").innerHTML = "";
-			// Get letter from player, check if already guessed, then replace letter
-			if (event.keyCode >= 65 && event.keyCode <= 90) {
-				userGuess = String.fromCharCode(event.keyCode).toUpperCase();
-				checkGuessed(userGuess);
-			} else {
-				document.querySelector(".red").innerHTML = "Please press a letter";
-			}
-			// Check to see if player won or lost
-			checkWin();
+	// Listen for keystrokes
+	document.onkeyup = function(event) {
+		// Reset non-letter and already-guessed
+		document.querySelector(".red").innerHTML = "";
+		// Get letter from player, check if already guessed, then replace letter
+		if (event.keyCode >= 65 && event.keyCode <= 90) {
+			userGuess = String.fromCharCode(event.keyCode).toUpperCase();
+			checkGuessed(userGuess);
+		} else {
+			document.querySelector(".red").innerHTML = "Please press a letter";
 		}
+		// Check to see if player won or lost
+		checkWin();
 	}
 
 	function checkGuessed(userGuess) {
@@ -159,13 +159,47 @@ window.onload = function() {
 		}
 	}
 
+	var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+	var count = 0;
+
 	// Media query to add input for mobile devices
-	var mq = window.matchMedia('@media all and (max-width: 640px)');
-	if(mq.matches) {
-	    // the width of browser is more then 640px
+	if (window.matchMedia("(min-width: 640px)").matches) {
+		/* the viewport is at least 640 pixels wide */
 	} else {
-	    // the width of browser is less then 640px
-	    document.querySelector(".media-input").innerHTML = '<input type="text">';
+		/* the viewport is less than 640 pixels wide */
+		// Add arrows, letter, and guess
+		document.querySelector(".media-input").innerHTML = '<button class="left"><</button><div class="letters"></div><button class="right">></button><button class="guessLetter">Guess</button>';
+		// Show first letter A
+		document.querySelector(".letters").innerHTML = alphabet[count];
+		// Move to left letter
+		document.querySelector(".left").addEventListener("click", function(){
+		    if (count == 0) {
+				count = 25;
+			} else {
+				count--;
+			}
+			document.querySelector(".letters").innerHTML = alphabet[count];
+		});
+		// Move to right letter
+		document.querySelector(".right").addEventListener("click", function(){
+		    if (count == 25) {
+				count = 0;
+			} else {
+				count++;
+			}
+			document.querySelector(".letters").innerHTML = alphabet[count];
+		});
+		// Guess letter
+		document.querySelector(".guessLetter").addEventListener("click", function(){
+		    // Reset non-letter and already-guessed
+			document.querySelector(".red").innerHTML = "";
+			// Get letter from player, check if already guessed, then replace letter
+			checkGuessed(document.querySelector(".letters").innerHTML);
+			// Check to see if player won or lost
+			checkWin();
+		});
 	}
+
+	
 
 }
