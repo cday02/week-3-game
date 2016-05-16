@@ -17,7 +17,7 @@ body {
 }
 
 body {
-    /*position: fixed;*/
+    position: fixed;
     color: #fff;
     background-image: url(../images/field.jpg);
     background-position: center;
@@ -44,27 +44,18 @@ div > * {
     vertical-align:middle;
 }
 
-/*img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 0 auto;
-}*/
-
 .wrapper {
     margin-top: 40px;
 	position: relative;
     text-align: center;
     font-size: 28px;
+    overflow : auto;
 }
 
 .hangman {
-    /*position: absolute;
-    bottom: 0;
-    left: 5%;*/
     display: inline-block;
     z-index: -1;
-    margin-left:100px;
+    margin-left: 100px;
 }
 
 .hangman > img {
@@ -72,9 +63,6 @@ div > * {
 }
 
 .info {
-	/*position: absolute;
-	top: 20%;
-	left: 45%;*/
     position: relative;
     display: inline-block;
 	line-height: 2em;
