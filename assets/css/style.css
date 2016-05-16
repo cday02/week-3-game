@@ -50,6 +50,7 @@ div > * {
     text-align: center;
     font-size: 28px;
     overflow : auto;
+    height: 100%;
 }
 
 .hangman {
