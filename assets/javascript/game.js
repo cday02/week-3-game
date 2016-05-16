@@ -46,6 +46,8 @@ window.onload = function() {
 		}
 		// Check to see if player won or lost
 		checkWin();
+		// Answer reset
+		desktopAnswerReset();
 	}
 
 	function checkGuessed(userGuess) {
@@ -110,19 +112,6 @@ window.onload = function() {
 		}
 	}
 
-	function selectNewWord() {
-		num++;
-		// Keep selecting new words when available
-		if (num < words.length) {
-			// Select new word
-			newWord(num);
-		} else {
-			// Reset num
-			num = 0;
-			newWord(num);
-		}
-	}
-
 	function answer(letter) {
 		// Hide instructions
 		document.querySelector(".green").style.visibility = "hidden";
@@ -137,25 +126,53 @@ window.onload = function() {
 		// Show answer
 		document.querySelector(".response").innerHTML = letter + "orrect! Its " + words[num] + "!";
 		document.querySelector(".character").innerHTML = '<img src="assets/images/' + words[num] + '.png">';
-		document.querySelector(".anykey").innerHTML = "Press any key to continue";
+	}
+
+	function desktopAnswerReset() {
 		// Any key restarts game
+		document.querySelector(".anykey").innerHTML = "Press any key to continue";
 		document.onkeyup = function(event) {
-			// Reset answer
-			document.querySelector(".response").innerHTML = "";
-			document.querySelector(".character").innerHTML = "";
-			document.querySelector(".anykey").innerHTML = "";
-			// Show instructions
-			document.querySelector(".green").style.visibility = "visible";
-			document.querySelector(".blue").style.visibility = "visible";
-			document.querySelector(".wins").style.visibility = "visible";
-			document.querySelector(".yellow").style.visibility = "visible";
-			document.querySelector(".positions").style.visibility = "visible";
-			document.querySelector(".brown").style.visibility = "visible";
-			document.querySelector(".guesses").style.visibility = "visible";
-			document.querySelector(".pink").style.visibility = "visible";
-			document.querySelector(".letters-guessed").style.visibility = "visible";
+			answerReset();
+		}
+	}
+
+	function mobileAnswerReset() {
+		// Guess key restarts game
+		document.querySelector(".anykey").innerHTML = "Press any guess to continue";
+		document.querySelector(".guessLetter").addEventListener("click", function(){
+		    answerReset();
+		});
+	}
+
+	function answerReset() {
+		// Reset answer
+		document.querySelector(".response").innerHTML = "";
+		document.querySelector(".character").innerHTML = "";
+		document.querySelector(".anykey").innerHTML = "";
+		// Show instructions
+		document.querySelector(".green").style.visibility = "visible";
+		document.querySelector(".blue").style.visibility = "visible";
+		document.querySelector(".wins").style.visibility = "visible";
+		document.querySelector(".yellow").style.visibility = "visible";
+		document.querySelector(".positions").style.visibility = "visible";
+		document.querySelector(".brown").style.visibility = "visible";
+		document.querySelector(".guesses").style.visibility = "visible";
+		document.querySelector(".pink").style.visibility = "visible";
+		document.querySelector(".letters-guessed").style.visibility = "visible";
+		// Select new word
+		selectNewWord();
+	}
+
+	function selectNewWord() {
+		num++;
+		// Keep selecting new words when available
+		if (num < words.length) {
 			// Select new word
-			selectNewWord();
+			newWord(num);
+		} else {
+			// Reset num
+			num = 0;
+			newWord(num);
 		}
 	}
 
@@ -199,9 +216,9 @@ window.onload = function() {
 			checkGuessed(document.querySelector(".letters").innerHTML);
 			// Check to see if player won or lost
 			checkWin();
+			// Answer reset
+			mobileAnswerReset();
 		});
 	}
-
-	
 
 }
