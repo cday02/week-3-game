@@ -8,6 +8,7 @@ window.onload = function() {
 	var wins;
 	var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 	var count = 0;
+	var toHide = [".green",".blue",".wins",".yellow",".positions",".brown",".guesses",".pink",".letters-guessed"]; 
 
 	// Set inital wins
 	wins = 0;
@@ -154,15 +155,9 @@ window.onload = function() {
 
 	function answer(letter) {
 		// Hide instructions
-		document.querySelector(".green").style.visibility = "hidden";
-		document.querySelector(".blue").style.visibility = "hidden";
-		document.querySelector(".wins").style.visibility = "hidden";
-		document.querySelector(".yellow").style.visibility = "hidden";
-		document.querySelector(".positions").style.visibility = "hidden";
-		document.querySelector(".brown").style.visibility = "hidden";
-		document.querySelector(".guesses").style.visibility = "hidden";
-		document.querySelector(".pink").style.visibility = "hidden";
-		document.querySelector(".letters-guessed").style.visibility = "hidden";
+		for (var i=0; i<toHide.length; i++) {
+			document.querySelector(toHide[i]).style.visibility = "hidden";
+		}
 		// Show answer
 		document.querySelector(".response").innerHTML = letter + "orrect! Its " + words[num] + "!";
 		document.querySelector(".character").innerHTML = '<img src="assets/images/' + words[num] + '.png">';
@@ -191,15 +186,9 @@ window.onload = function() {
 		document.querySelector(".character").innerHTML = "";
 		document.querySelector(".anykey").innerHTML = "";
 		// Show instructions
-		document.querySelector(".green").style.visibility = "visible";
-		document.querySelector(".blue").style.visibility = "visible";
-		document.querySelector(".wins").style.visibility = "visible";
-		document.querySelector(".yellow").style.visibility = "visible";
-		document.querySelector(".positions").style.visibility = "visible";
-		document.querySelector(".brown").style.visibility = "visible";
-		document.querySelector(".guesses").style.visibility = "visible";
-		document.querySelector(".pink").style.visibility = "visible";
-		document.querySelector(".letters-guessed").style.visibility = "visible";
+		for (var i=0; i<toHide.length; i++) {
+			document.querySelector(toHide[i]).style.visibility = "visible";
+		}
 		// Select new word
 		selectNewWord();
 	}
