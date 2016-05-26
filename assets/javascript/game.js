@@ -16,15 +16,22 @@ window.onload = function() {
 	// Select the first word
 	var num = 0;
 	newWord(num);
-	
+
+	// Set initial guesses
+	guesses = 5;
+	document.querySelector(".guesses").innerHTML = guesses;
+	// Show hangman
+	for (var i=0; i<=guesses; i++) {
+		document.querySelector(".hangman").innerHTML += '<img class="guess' + i + '" src="assets/images/hangman' + i + '.png">';
+		if (i != guesses) {
+			document.querySelector(".guess" + i).style.visibility = 'hidden';
+		}
+	}
 
 	function newWord(num) {
-		// Set initial guesses
+		// Clear positions and guesses
 		guesses = 5;
 		document.querySelector(".guesses").innerHTML = guesses;
-		// Show hangman
-		document.querySelector(".hangman").innerHTML = '<img src="assets/images/hangman' + guesses + '.png">';
-		// Clear positions and guesses
 		positions = [];
 		guessedLetters = [];
 		document.querySelector(".letters-guessed").innerHTML = guessedLetters.join(" ");
@@ -49,9 +56,7 @@ window.onload = function() {
 			checkWin();
 		}
 		// Media query to add input for mobile devices
-		if (window.matchMedia("(min-width: 640px)").matches) {
-			/* the viewport is at least 640 pixels wide */
-		} else {
+		if (window.matchMedia("(max-width: 780px) and (orientation: portrait)").matches) {
 			/* the viewport is less than 640 pixels wide */
 			// Add arrows, letter, and guess
 			document.querySelector(".media-input").innerHTML = '<button class="left"><</button><div class="letters"></div><button class="right">></button><button class="guessLetter">Guess</button>';
@@ -89,8 +94,6 @@ window.onload = function() {
 		}
 	}
 
-	
-
 	function checkGuessed(userGuess) {
 		// Check to see if letter matches any letters in word
 		check: {
@@ -122,8 +125,11 @@ window.onload = function() {
 		if (replacements == 0) {
 			// If no replacements reduce guesses
 			guesses--;
+			// Display guesses
 			document.querySelector(".guesses").innerHTML = guesses;
-			document.querySelector(".hangman").innerHTML = '<img src="assets/images/hangman' + guesses + '.png">';
+			// Display new hangman
+			document.querySelector(".guess" + String(guesses+1)).style.visibility = 'hidden';
+			document.querySelector(".guess" + guesses).style.visibility = 'visible';
 			// Push and display guessed letters
 			guessedLetters.push(userGuess);
 			document.querySelector(".letters-guessed").innerHTML = guessedLetters.join(" ");
@@ -161,6 +167,12 @@ window.onload = function() {
 		// Show answer
 		document.querySelector(".response").innerHTML = letter + "orrect! Its " + words[num] + "!";
 		document.querySelector(".character").innerHTML = '<img src="assets/images/' + words[num] + '.png">';
+		// Position spongebob properly
+		if (words[num] == 'SPONGEBOB' || words[num] == 'GARY') {
+			document.querySelector(".answer").className += ' moveRight';
+		} else {
+			document.querySelector(".answer").className = 'answer';
+		}
 		// Any key restarts game
 		document.querySelector(".anykey").innerHTML = "Press any key to continue";
 		// Listen for key to reset
@@ -188,6 +200,14 @@ window.onload = function() {
 		// Show instructions
 		for (var i=0; i<toHide.length; i++) {
 			document.querySelector(toHide[i]).style.visibility = "visible";
+		}
+		// Show hangman
+		for (var i=0; i<=5; i++) {
+			if (i != 5) {
+				document.querySelector(".guess" + i).style.visibility = 'hidden';
+			} else {
+				document.querySelector(".guess" + i).style.visibility = 'visible';
+			}
 		}
 		// Select new word
 		selectNewWord();
