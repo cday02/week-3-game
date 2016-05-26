@@ -54,25 +54,32 @@ div > * {
 }
 
 .hangman {
-    display: inline-block;
-    z-index: -1;
-    margin-left: 100px;
+    position: relative;
+    display: block;
+    width: 49%;
+    margin: 0 auto;
+    float: right;
 }
 
 .hangman > img {
+    position: absolute;
     max-height: 400px;
+    top: 0;
+    left: 0;
 }
 
 .info {
     position: relative;
-    display: inline-block;
+    display: block;
+    width: 49%;
 	line-height: 2em;
+    float: left;
 }
 
 .answer {
     position: absolute;
-    top: 10px;
-    left: 10;
+    top: 0;
+    right: 0;
 }
 
 .red {
@@ -103,6 +110,10 @@ div > * {
     display: block;
 }
 
+.media-input {
+    margin-bottom: 5vh;
+}
+
 .media-input > * {
     display: inline;
 }
@@ -125,13 +136,7 @@ button {
     margin-left: 40px;
 }
 
-@media screen and (max-width: 980px) and (min-width: 769px) {
-    .hangman {
-        margin: 0;
-    }
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 780px) and (orientation: portrait) {
     header {
         font-size: 50px;
     }
@@ -148,8 +153,8 @@ button {
     .info {
         line-height: 1.5em;
     }
+    .moveRight {
+        right: -20vw;
+        z-index: 1;
+    }
 }
-
-/*@media screen and (max-width: 640px) {
-    
-}*/
